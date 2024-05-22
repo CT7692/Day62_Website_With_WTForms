@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
+from flask.helpers import redirect
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, URL
 import csv
@@ -60,7 +61,7 @@ def add_cafe():
             writer.writerow(
                 [cafe, location, open_time, close_time,
                  coffee_rating, wifi_rating, availability])
-        return render_template("index.html")
+        return redirect(url_for('cafes'))
 
     return render_template('add.html', form=form)
 
